@@ -57,8 +57,8 @@
 
     CGContextSetLineWidth(context, 1.0);
 
-    int n = history.count;
-    for (int i = 0; i < n; i++) {
+    NSUInteger n = history.count;
+    for (NSUInteger i = 0; i < n; i++) {
         float value = [history[n - i - 1] floatValue];
         
         // max: 0dB -> 0 (red)
@@ -98,10 +98,15 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
     NSArray *audioChannels = connection.audioChannels;
-    
-    for (AVCaptureAudioChannel *channel in audioChannels) {
+    if (0 < audioChannels.count) {
+        AVCaptureAudioChannel *channel = audioChannels[0];
         self.average = channel.averagePowerLevel;
         self.peak = channel.peakHoldLevel;
+        if (1 < audioChannels.count) {
+            NSLog(@"warning: more than one audioChannels, ignored.");
+        }
+    } else {
+        NSLog(@"warning: no audioChannels.");
     }
 }
 
