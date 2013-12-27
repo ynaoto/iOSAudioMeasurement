@@ -172,6 +172,8 @@
 
             float min, max;
             
+//            NSDate *start = [NSDate date];
+            
             if (self.useVDSP.on) {
                 float *convertedSamples = malloc(numSamples * sizeof(float));
                 vDSP_vflt16(samples, 1, convertedSamples, 1, numSamples);
@@ -191,6 +193,9 @@
                     }
                 }
             }
+            
+//            NSTimeInterval elapsed = -[start timeIntervalSinceNow];
+//            NSLog(@"elapsed = %g", elapsed*1000*1000);
             
             self.range = max - min;
 
