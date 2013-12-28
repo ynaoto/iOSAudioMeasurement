@@ -63,8 +63,8 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGFloat maxX = CGRectGetMaxX(rect);
-    CGFloat maxY = CGRectGetMaxY(rect);
+    CGFloat maxX = CGRectGetMaxX(self.bounds);
+    CGFloat maxY = CGRectGetMaxY(self.bounds);
 
     CGContextSetLineWidth(context, 1.0);
 
